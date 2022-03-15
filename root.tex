@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\title{\LARGE \bf
+Vibrotactile Feedback with ITAP: A Computational Study
+}
+
+
+\author{Jonathan De Souza Holt$^{1}$, Henry T. Lancashire$^{1}$, and Catherine Pendegrass$^{2}$% <-this % stops a space
+\thanks{*This work was supported by a UCL student project grant to J.D.S.H.}% <-this % stops a space
+\thanks{$^{1}$J.D.S.H. and H.L. are with Department of Medical Physics and Biomedical Engineering,
+        University College London, London, WC1E 6BT, United Kingdom. Correspondence:
+        {\tt\small h.lancashire@ucl.ac.uk}}%
+\thanks{$^{2}$C.P. is with the Division of Surgery and Interventional Science,
+        University College London, London, WC1E 6BT, United Kingdom.
+        {\tt\small }}%
+}
+
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+Intraosseous trancutaneous amputation prostheses (ITAPs) can be used to provide vibrotactile feedback. Vibration transmission through ITAP was investigated computationally. At and below clinically relevant frequencies transmission is linear, above 100 Hz vibration deviates from linear, with a first mode of vibration at 900 Hz. %Abstract here
+\newline
+
+\indent \textit{Clinical relevance}— Vibrotactile feedback can enable amputees to ``feel'' using a prosthesis. Combined with ITAP bone-anchors this will provide enhanced osseoperception. %This is a brief additional statement on why a this might be of interest to practicing clinicians. 
+\end{abstract}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{INTRODUCTION}
+
+Intraosseous trancutaneous amputation prostheses (ITAPs) are bone-anchored, skin-crossing devices which overcome challenges with socket prostheses \cite{c1}. ITAPs present users with sensory feedback through osseoperception, forces on the end prothesis are transmitted directly to the user, and can provide bionic gateways for prosthesis control \cite{c2}.  Vibrotactile feedback enhance osseoperception and provide upper limb prosthesis users with touch and grip-force sensory feedback to close-the-loop, creating intuitive prostheses \cite{c3}. In this paper we describe the transmission of vibrotactile forces through ITAP estimated using a computational model.
+
+\section{METHODS}
+
+\subsection{The ITAP Model}
+
+A model ITAP was designed ... mesh ... material ...
+
+\subsection{The Computational Approach}
+
+An ABAQUS (VERSION, OS, YEAR) finite element analysis model applied ... force ... solver ...
+
+Modal analysis was carried out ...
+
+Linear displacement forces were generated according to equation (1), where $\textbf{s}$ is displacement, $t$ is time, and $\omega$ is radial frequency, and $x$ is a Cartesian axis. Circular forces were generated according to equation (2), where $x$ and $y$ are perpendicular. Frequencies of clinical interest, between ... were investigated.
+
+$$
+\textbf{s}_x(t) = \sin(\omega t) \eqno{(1)}
+$$
+$$
+\textbf{s}_x(t) = \sin(\omega t), \textbf{s}_y(x) = \cos(\omega t) \eqno{(2)}
+$$
+
+
+\section{RESULTS}
+
+\subsection{Modal Analysis} Natural frequencies of vibration were observed at ... Hz. 
+
+\subsection{Low Frequency Analysis}
+
+Linear response...
+
+
+
+%\subsection{Figures and Tables}
+%
+%Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation `Fig. 1', even at the beginning of a sentence.
+%
+
+\begin{figure}[t]
+	\centering
+	\framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
+	}}
+	%\includegraphics[scale=1.0]{figurefile}
+	\caption{Inductance of oscillation winding on amorphous
+		magnetic core versus DC bias magnetic field}
+	\label{figurelabel}
+\end{figure}
+
+\begin{table}[b]
+\caption{An Example of a Table}
+\label{table_example}
+\begin{center}
+\begin{tabular}{|c||c|}
+\hline
+One & Two\\
+\hline
+Three & Four\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+%   
+%
+%Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity `Magnetization', or `Magnetization, M', not just `M'. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write `Magnetization (A/m)' or `Magnetization {A[m(1)]}', not just `A/m'. Do not label axes with a ratio of quantities and units. For example, write `Temperature (K)', not `Temperature/K.'
+
+\section{CONCLUSIONS}
+
+A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{APPENDIX}
+%
+%Appendixes should appear before the acknowledgment.
+
+\section*{ACKNOWLEDGEMENT}
+
+We acknowledge advice from Prof. R. Loureiro.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
+\begin{thebibliography}{99}
+\bibitem{c1} N. V. Kang, C. Pendegrass, L. Marks, and G. Blunn, `Osseocutaneous Integration of an Intraosseous Transcutaneous Amputation Prosthesis Implant Used for Reconstruction of a Transhumeral Amputee: Case Report,' J. Hand Surg. Am., vol. 35(7), pp. 1130-1134, July 2010.
+\bibitem{c2} H. T. Lancashire, Y. Al Ajam, R. P. Dowling, C. Pendegrass, and G. Blunn, `Hard-wired Epimysial Recordings from Normal and Reinnervated Muscle Using a Bone-anchored Device,' Plast. Reconstr. Surg. Glob Open, vol. 7(9), p. e2391, Sept. 2019.
+\bibitem{c3} E. H\"{a}ggstr\"{o}m, K. Hagberg, B. Rydevik, R. Br\r{a}nemark, `Vibrotactile evaluation: Osseointegrated versus socket-suspended transfemoral prostheses,' J. Rehabil. Res. Dev., vol. 50(10), pp. 1423–34, 2013.
+\end{thebibliography}
+
+
+
+
+\end{document}
