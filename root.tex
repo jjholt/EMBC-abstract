@@ -23,11 +23,13 @@
 % on the last page of the document
 
 % The following packages can be found on http:\\www.ctan.org
-%\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{graphics} % for pdf, bitmapped graphics files
 %\usepackage{epsfig} % for postscript graphics files
 %\usepackage{mathptmx} % assumes new font selection scheme installed
 %\usepackage{times} % assumes new font selection scheme installed
-%\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{tikz}
+\usepackage{pgfplots}
 %\usepackage{amssymb}  % assumes amsmath package installed
 
 \title{\LARGE \bf
@@ -35,9 +37,9 @@ Vibrotactile Feedback with ITAP: A Computational Study
 }
 
 
-\author{Jonathan De Souza Holt$^{1}$, Henry T. Lancashire$^{1}$, and Catherine Pendegrass$^{2}$% <-this % stops a space
-\thanks{*This work was supported by a UCL student project grant to J.D.S.H.}% <-this % stops a space
-\thanks{$^{1}$J.D.S.H. and H.L. are with Department of Medical Physics and Biomedical Engineering,
+\author{Jonathan Holt$^{1}$, Henry T. Lancashire$^{1}$, and Catherine Pendegrass$^{2}$% <-this % stops a space
+\thanks{*This work was supported by a UCL student project grant to J.H.}% <-this % stops a space
+\thanks{$^{1}$J.H. and H.L. are with Department of Medical Physics and Biomedical Engineering,
         University College London, London, WC1E 6BT, United Kingdom. Correspondence:
         {\tt\small h.lancashire@ucl.ac.uk}}%
 \thanks{$^{2}$C.P. is with the Division of Surgery and Interventional Science,
@@ -57,8 +59,7 @@ Vibrotactile Feedback with ITAP: A Computational Study
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-
-Intraosseous trancutaneous amputation prostheses (ITAPs) can be used to provide vibrotactile feedback. Vibration transmission through ITAP was investigated computationally. At and below clinically relevant frequencies transmission is linear, above 100 Hz vibration deviates from linear, with a first mode of vibration at 900 Hz. %Abstract here
+Intraosseous trancutaneous amputation prostheses (ITAPs) can be used to provide vibrotactile feedback. Vibration transmission through ITAP was investigated computationally. At and below clinically relevant frequencies transmission is linear, above 400 Hz vibration deviates from linear, with a first mode of vibration at 940 Hz. %Abstract here
 \newline
 
 \indent \textit{Clinical relevance}— Vibrotactile feedback can enable amputees to ``feel'' using a prosthesis. Combined with ITAP bone-anchors this will provide enhanced osseoperception. %This is a brief additional statement on why a this might be of interest to practicing clinicians. 
@@ -68,35 +69,32 @@ Intraosseous trancutaneous amputation prostheses (ITAPs) can be used to provide 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
-
 Intraosseous trancutaneous amputation prostheses (ITAPs) are bone-anchored, skin-crossing devices which overcome challenges with socket prostheses \cite{c1}. ITAPs present users with sensory feedback through osseoperception, forces on the end prothesis are transmitted directly to the user, and can provide bionic gateways for prosthesis control \cite{c2}.  Vibrotactile feedback enhance osseoperception and provide upper limb prosthesis users with touch and grip-force sensory feedback to close-the-loop, creating intuitive prostheses \cite{c3}. In this paper we describe the transmission of vibrotactile forces through ITAP estimated using a computational model.
 
 \section{METHODS}
 
 \subsection{The ITAP Model}
-
-A model ITAP was designed ... mesh ... material ...
+A model ITAP was designed with stem length of 120 mm and a proximal stem radius of 6 mm, narrowing to 4.5 mm distally.
+The collar has a height of 6 mm and radius of 14 mm.
+The spigot has a height of 45 mm and radius of 9 mm.
 
 \subsection{The Computational Approach}
+A finite element analysis model was created in Abaqus (v.2021, Linux) using a 2.5~mm, hexahedral-dominated mesh (element types C3D8R and C3D6) with properties that of Titanium 6--4, i.e., elastic material of density 4430~Kg/m$^3$, Young's modulus 114~GPa and Poisson's ratio 0.33.
 
-An ABAQUS (VERSION, OS, YEAR) finite element analysis model applied ... force ... solver ...
+Both modal analysis and prescribed linear displacement were carried out using Abaqus/Standard.
 
-Modal analysis was carried out ...
+The model applied a concentrated point-force on the spigot prescribing a linear displacement according to equation (1), where $\textbf{s}$ is displacement in mm, $t$ is time, $f$ is linear frequency, $x$ is a Cartesian axis.
+Frequencies between 1 and 900 Hz were investigated, though only up to 250 Hz are of clinical interest.
 
-Linear displacement forces were generated according to equation (1), where $\textbf{s}$ is displacement, $t$ is time, and $\omega$ is radial frequency, and $x$ is a Cartesian axis. Circular forces were generated according to equation (2), where $x$ and $y$ are perpendicular. Frequencies of clinical interest, between ... were investigated.
-
-$$
-\textbf{s}_x(t) = \sin(\omega t) \eqno{(1)}
-$$
-$$
-\textbf{s}_x(t) = \sin(\omega t), \textbf{s}_y(x) = \cos(\omega t) \eqno{(2)}
-$$
+\begin{equation}
+    \textbf{s}_x(t) = 0.2\sin(2\pi f t)
+\end{equation}
 
 
 \section{RESULTS}
 
-\subsection{Modal Analysis} Natural frequencies of vibration were observed at ... Hz. 
-
+\subsection{Modal Analysis}
+Natural frequencies of vibration were observed at ... Hz, though the first pertinent was 937 Hz. 
 \subsection{Low Frequency Analysis}
 
 Linear response...
@@ -110,27 +108,41 @@ Linear response...
 
 \begin{figure}[t]
 	\centering
-	\framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
-	}}
-	%\includegraphics[scale=1.0]{figurefile}
-	\caption{Inductance of oscillation winding on amorphous
-		magnetic core versus DC bias magnetic field}
+        \begin{tikzpicture}[scale=0.7]
+            \selectcolormodel{gray} % Comment out if you want colour
+            \begin{loglogaxis}[
+                xlabel = {Frequency (Hz)}, ylabel = {Maximum displacement (m)},
+                legend columns = 3, anchor = south east,
+            ]
+                \addplot+[only marks] table [ col sep=comma,]
+                    {figures/spigot_maxima.csv};
+                \addlegendentry{Spigot}
+                \addplot+[ only marks ] table [col sep=comma,]
+                    {figures/stem_maxima.csv};
+                \addlegendentry{Stem}
+                \addplot+[ only marks ] table [col sep=comma, ]
+                    {figures/collar_maxima.csv};
+                \addlegendentry{Collar}
+            \end{loglogaxis}
+        \end{tikzpicture}
+	% \includegraphics[scale=1.0]{figure}
+	\caption{Maximum displacement observed at each ITAP segment given input of amplitude 0.2 mm.}
 	\label{figurelabel}
 \end{figure}
 
-\begin{table}[b]
-\caption{An Example of a Table}
-\label{table_example}
-\begin{center}
-\begin{tabular}{|c||c|}
-\hline
-One & Two\\
-\hline
-Three & Four\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
+% \begin{table}[b]
+% \caption{An Example of a Table}
+% \label{table_example}
+% \begin{center}
+% \begin{tabular}{|c||c|}
+% \hline
+% One & Two\\
+% \hline
+% Three & Four\\
+% \hline
+% \end{tabular}
+% \end{center}
+% \end{table}
 
 
 %   
@@ -155,7 +167,7 @@ A conclusion section is not required. Although a conclusion may review the main 
 
 \section*{ACKNOWLEDGEMENT}
 
-We acknowledge advice from Prof. R. Loureiro.
+We acknowledge advice from G. Ramalho and Prof. R. Loureiro.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -163,7 +175,7 @@ We acknowledge advice from Prof. R. Loureiro.
 \begin{thebibliography}{99}
 \bibitem{c1} N. V. Kang, C. Pendegrass, L. Marks, and G. Blunn, `Osseocutaneous Integration of an Intraosseous Transcutaneous Amputation Prosthesis Implant Used for Reconstruction of a Transhumeral Amputee: Case Report,' J. Hand Surg. Am., vol. 35(7), pp. 1130-1134, July 2010.
 \bibitem{c2} H. T. Lancashire, Y. Al Ajam, R. P. Dowling, C. Pendegrass, and G. Blunn, `Hard-wired Epimysial Recordings from Normal and Reinnervated Muscle Using a Bone-anchored Device,' Plast. Reconstr. Surg. Glob Open, vol. 7(9), p. e2391, Sept. 2019.
-\bibitem{c3} E. H\"{a}ggstr\"{o}m, K. Hagberg, B. Rydevik, R. Br\r{a}nemark, `Vibrotactile evaluation: Osseointegrated versus socket-suspended transfemoral prostheses,' J. Rehabil. Res. Dev., vol. 50(10), pp. 1423–34, 2013.
+\bibitem{c3} E. H\"{a}ggstr\"{o}m, K. Hagberg, B. Rydevik, R. Br\r{a}nemark, `Vibrotactile evaluation: Osseointegrated versus socket-suspended transfemoral prostheses,' J. Rehabil. Res. Dev., vol. 50(10), pp. 1423--34, 2013.
 \end{thebibliography}
 
 

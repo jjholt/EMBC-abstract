@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\begin{document}
+    \begin{tikzpicture}
+        \begin{loglogaxis}[
+            % width = 14cm, height = 6cm,
+            xlabel = {Frequency [Hz]}, ylabel = {Maximum displacement [m]},
+            legend columns = 3, anchor = south east,
+        ]
+            \addplot+[only marks] table [ col sep=comma,]
+                {figures/spigot_maxima.csv};
+            \addlegendentry{Spigot}
+            \addplot+[ only marks ] table [col sep=comma,]
+                {figures/stem_maxima.csv};
+            \addlegendentry{Stem}
+            \addplot+[ only marks ] table [col sep=comma, ]
+                {figures/collar_maxima.csv};
+            \addlegendentry{Collar}
+        \end{loglogaxis}
+    \end{tikzpicture}
+\end{document}
