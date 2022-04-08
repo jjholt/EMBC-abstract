@@ -68,25 +68,25 @@ Intraosseous trancutaneous amputation prostheses (ITAPs) can be used to provide 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
-Intraosseous trancutaneous amputation prostheses (ITAPs) are bone-anchored, skin-crossing devices which overcome challenges with socket prostheses \cite{c1}. ITAPs present users with sensory feedback through osseoperception, forces on the end prothesis are transmitted directly to the user, and can provide bionic gateways for prosthesis control \cite{c2}.  Vibrotactile feedback enhance osseoperception and provide upper limb prosthesis users with touch and grip-force sensory feedback to close-the-loop, creating intuitive prostheses \cite{c3}. In this paper we describe the transmission of vibrotactile forces through ITAP estimated using a computational model.
+Intraosseous trancutaneous amputation prostheses (ITAPs) are bone-anchored, skin-crossing devices which overcome challenges with socket prostheses \cite{c1}. ITAPs present users with sensory feedback through osseoperception, forces on the end prothesis are transmitted directly to the user, and can provide bionic gateways for prosthesis control \cite{c2}.  Vibrotactile feedback enhance osseoperception and provide upper limb prosthesis users with touch and grip-force sensory feedback to close-the-loop, creating intuitive prostheses \cite{c3}. In this paper we characterise vibrations propagating through ITAP estimated using a computational model.
 
 \section{METHODS}
 
 \subsection{The ITAP Model}
-A model ITAP was designed with stem length of 120 mm and a proximal stem radius of 6 mm, narrowing to 4.5 mm distally.
-The collar has a height of 6 mm and radius of 14 mm.
-The spigot has a height of 45 mm and radius of 9 mm.
+A model ITAP was designed with intermedullary stem length of 120 mm, proximal stem radius 6 mm, tapering to 4.5 mm distally.
+A 6 mm high 14 mm radius collar sits on the distal bone cortex.
+An external spigot has a height of 45 mm and radius of 9 mm.
 
 \subsection{The Computational Approach}
-A finite element analysis model was created in Abaqus (v.2021, Linux) using a 2.5~mm, hexahedral-dominated mesh (element types C3D8R and C3D6) with properties that of Titanium 6--4, i.e., elastic material of density 4430~Kg/m$^3$, Young's modulus 114~GPa and Poisson's ratio 0.33.
+A finite element analysis model was created in Abaqus (v.2021, Linux) using a hexahedral-dominated, 2.5~mm mesh (element types C3D8R and C3D6) with properties that of Titanium 6--4, i.e., elastic material of density 4430~Kg/m$^3$, Young's modulus 114~GPa and Poisson's ratio 0.33.
 
 Both modal analysis and prescribed linear displacement were carried out using Abaqus/Standard.
 
 The model applied a concentrated point-force on the spigot prescribing a linear displacement according to equation (1), where $\textbf{s}$ is displacement in mm, $t$ is time, $f$ is linear frequency, $x$ is a Cartesian axis.
-Frequencies between 1 and 900 Hz were investigated, though only up to 250 Hz are of clinical interest.
+Frequencies between 1 and 900 Hz were investigated, of which up to to 250 Hz are of clinical interest.
 
 \begin{equation}
-    \textbf{s}_x(t) = 0.2\sin(2\pi f t)
+    \textbf{s}_x(t) = \cos(2\pi f t)
 \end{equation}
 
 
@@ -96,7 +96,7 @@ Frequencies between 1 and 900 Hz were investigated, though only up to 250 Hz are
 Natural frequencies of vibration were observed at 930 Hz and 3930 Hz, confirming the device is well-behaved in the clinically relevant frequency range.
 \subsection{Low Frequency Analysis}
 
-Observe linear response up to about 400 Hz with a decline in the maximum amplitude of 60 dB/decade.
+Observed linear response up to about 400 Hz with a decline in the maximum amplitude of 60 dB/decade.
 
 
 %\subsection{Figures and Tables}
@@ -152,7 +152,7 @@ Observe linear response up to about 400 Hz with a decline in the maximum amplitu
 A fairly simple model of an ITAP was created, from which we established a basic understanding of the device's frequency response.
 This study forms the basis for further computational models of vibrations propagating through ITAP that is inserted into the medullary cavity. %write in situ instead?
 
-In parallel to these more complex models, there is a need for better understanding of the resolution of vibrations with osteoperception.
+In parallel to these more complex models, there is a need for better understanding of the resolution of osseoperception to vibrotactile feedback.
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
